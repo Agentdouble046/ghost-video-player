@@ -46,7 +46,7 @@ export default function SettingsScreen() {
 
   const loadSettings = async () => {
     try {
-      const data = await api.get('/settings') as AppSettings;
+      const data: AppSettings = await api.get('/settings');
       setSettings(data);
     } catch (error) {
       console.error('Error loading settings:', error);
