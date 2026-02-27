@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { usePlayerStore } from '../../../src/store/usePlayerStore';
-import api from '../../../src/utils/api';
-import { Track } from '../../../src/types/media';
-import { formatDuration } from '../../../src/utils/formatters';
+import { usePlayerStore } from '../../src/store/usePlayerStore';
+import api from '../../src/utils/api';
+import { Track } from '../../src/types/media';
+import { formatDuration } from '../../src/utils/formatters';
 
 export default function SearchScreen() {
   const { setQueue } = usePlayerStore();

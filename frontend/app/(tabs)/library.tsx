@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLibraryStore } from '../../../src/store/useLibraryStore';
-import { usePlayerStore } from '../../../src/store/usePlayerStore';
-import api from '../../../src/utils/api';
-import { Track, Album, Artist, Genre, Playlist } from '../../../src/types/media';
-import { formatDuration } from '../../../src/utils/formatters';
+import { useLibraryStore } from '../../src/store/useLibraryStore';
+import { usePlayerStore } from '../../src/store/usePlayerStore';
+import api from '../../src/utils/api';
+import { Track, Album, Artist, Genre, Playlist } from '../../src/types/media';
+import { formatDuration } from '../../src/utils/formatters';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 

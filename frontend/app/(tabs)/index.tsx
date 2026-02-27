@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLibraryStore } from '../../../src/store/useLibraryStore';
-import { usePlayerStore } from '../../../src/store/usePlayerStore';
-import api from '../../../src/utils/api';
-import { Track, Album } from '../../../src/types/media';
+import { useLibraryStore } from '../../src/store/useLibraryStore';
+import { usePlayerStore } from '../../src/store/usePlayerStore';
+import api from '../../src/utils/api';
+import { Track, Album } from '../../src/types/media';
 
 const { width } = Dimensions.get('window');
 

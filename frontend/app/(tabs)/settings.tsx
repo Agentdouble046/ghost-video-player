@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import api from '../../../src/utils/api';
-import { AppSettings } from '../../../src/types/media';
+import api from '../../src/utils/api';
+import { AppSettings } from '../../src/types/media';
 
 export default function SettingsScreen() {
   const [settings, setSettings] = useState<AppSettings>({
