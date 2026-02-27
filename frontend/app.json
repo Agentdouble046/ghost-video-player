@@ -47,7 +47,14 @@
           "photosPermission": "Allow OmniPlayer to access your media files",
           "savePhotosPermission": "Allow OmniPlayer to save media files"
         }
-      ]
+      ],
+      [
+        "expo-background-fetch",
+        {
+          "backgroundFetchInterval": 15
+        }
+      ],
+      "expo-task-manager"
     ],
     "experiments": {
       "typedRoutes": true
