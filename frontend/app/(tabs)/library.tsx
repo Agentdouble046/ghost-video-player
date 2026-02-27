@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLibraryStore } from '../../store/useLibraryStore';
-import { usePlayerStore } from '../../store/usePlayerStore';
-import api from '../../utils/api';
-import { Track, Album, Artist, Genre, Playlist } from '../../types/media';
-import { formatDuration } from '../../utils/formatters';
+import { useLibraryStore } from '../../../src/store/useLibraryStore';
+import { usePlayerStore } from '../../../src/store/usePlayerStore';
+import api from '../../../src/utils/api';
+import { Track, Album, Artist, Genre, Playlist } from '../../../src/types/media';
+import { formatDuration } from '../../../src/utils/formatters';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 
@@ -158,7 +158,6 @@ export default function LibraryScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Library</Text>
         <TouchableOpacity style={styles.addButton} onPress={pickAudioFile}>
@@ -166,7 +165,6 @@ export default function LibraryScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <Ionicons name="search" size={20} color="#B3B3B3" style={styles.searchIcon} />
         <TextInput
@@ -178,7 +176,6 @@ export default function LibraryScreen() {
         />
       </View>
 
-      {/* Tabs */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -235,7 +232,6 @@ export default function LibraryScreen() {
         </TouchableOpacity>
       </ScrollView>
 
-      {/* Content */}
       <View style={styles.content}>
         {activeTab === 'tracks' && (
           <>
