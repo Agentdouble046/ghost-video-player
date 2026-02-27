@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Switch,
   Alert,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -14,12 +15,14 @@ import api from '../../src/utils/api';
 import { AppSettings } from '../../src/types/media';
 import ThemeCustomizer from '../../src/components/theme/ThemeCustomizer';
 import MediaScanner from '../../src/components/media/MediaScanner';
+import YouTubeDownloader from '../../src/components/youtube/YouTubeDownloader';
 import { useThemeStore } from '../../src/store/useThemeStore';
 
 export default function SettingsScreen() {
   const { themeColor } = useThemeStore();
   const [showThemeCustomizer, setShowThemeCustomizer] = useState(false);
   const [showMediaScanner, setShowMediaScanner] = useState(false);
+  const [showYouTubeDownloader, setShowYouTubeDownloader] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     theme: 'dark',
     customThemeColor: '#2196F3',
