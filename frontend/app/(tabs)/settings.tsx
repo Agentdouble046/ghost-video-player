@@ -307,6 +307,18 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      {/* Theme Customizer Modal */}
+      <ThemeCustomizer
+        visible={showThemeCustomizer}
+        onClose={() => setShowThemeCustomizer(false)}
+      />
+
+      {/* Media Scanner Modal */}
+      <MediaScanner
+        visible={showMediaScanner}
+        onClose={() => setShowMediaScanner(false)}
+      />
     </SafeAreaView>
   );
 }
