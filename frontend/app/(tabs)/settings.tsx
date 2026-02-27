@@ -349,6 +349,22 @@ export default function SettingsScreen() {
           </ScrollView>
         </View>
       )}
+
+      {/* YouTube Downloader Modal */}
+      {showYouTubeDownloader && (
+        <View style={styles.scannerModal}>
+          <View style={styles.scannerHeader}>
+            <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
+              <Ionicons name='close' size={28} color='#FFFFFF' />
+            </TouchableOpacity>
+            <Text style={styles.scannerTitle}>YouTube Downloader</Text>
+            <View style={{ width: 28 }} />
+          </View>
+          <ScrollView style={styles.scannerContent}>
+            <YouTubeDownloader />
+          </ScrollView>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
