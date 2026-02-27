@@ -12,9 +12,9 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Audio, AVPlaybackStatus, InterruptionModeIOS, InterruptionModeAndroid } from 'expo-av';
 import Slider from '@react-native-community/slider';
-import { usePlayerStore } from '../../store/usePlayerStore';
-import { formatDuration } from '../../utils/formatters';
-import api from '../../utils/api';
+import { usePlayerStore } from '@/store/usePlayerStore';
+import { formatDuration } from '@/utils/formatters';
+import api from '@/utils/api';
 
 const { width, height } = Dimensions.get('window');
 
