@@ -296,7 +296,7 @@ async def get_albums():
                 "artist": {"$first": "$metadata.artist"},
                 "artwork": {"$first": "$artwork"},
                 "trackCount": {"$sum": 1},
-                "tracks": {"$push": "$$ROOT"}
+                "trackIds": {"$push": "$id"}
             }
         },
         {"$sort": {"_id": 1}}
