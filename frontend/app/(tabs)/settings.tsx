@@ -22,6 +22,7 @@ export default function SettingsScreen() {
   const [showMediaScanner, setShowMediaScanner] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     theme: 'dark',
+    customThemeColor: '#2196F3',
     dynamicTheming: true,
     crossfadeDuration: 0,
     replayGain: false,
@@ -38,6 +39,8 @@ export default function SettingsScreen() {
     enableSubtitles: true,
     defaultPlaybackSpeed: 1.0,
     enableGestures: true,
+    customBackground: null,
+    backgroundType: 'color',
   });
 
   useEffect(() => {
