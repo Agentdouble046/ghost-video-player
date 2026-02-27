@@ -1,56 +1,74 @@
-diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
-index e1cc07e..daa61fa 100644
---- a/frontend/src/types/media.ts
-+++ b/frontend/src/types/media.ts
-@@ -98,7 +98,7 @@ export interface AppSettings {
-   artistSeparators: string[];
-   genreSeparators: string[];
-   enableBackgroundPlay: boolean;
--  alwaysBackgroundPlay?: boolean;
-+  alwaysBackgroundPlay: boolean;
-   enableVideoPlayback: boolean;
-   enableSubtitles: boolean;
-   defaultPlaybackSpeed: number;
+diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+index 542b9ca..929ffd8 100644
+--- a/frontend/app/(tabs)/settings.tsx
++++ b/frontend/app/(tabs)/settings.tsx
+@@ -27,7 +27,7 @@ export default function SettingsScreen() {
+     artistSeparators: [';', '/', ','],
+     genreSeparators: [';', '/', ','],
+     enableBackgroundPlay: true,
+-    alwaysBackgroundPlay: false,
++    alwaysBackgroundPlay: true,
+     enableVideoPlayback: true,
+     enableSubtitles: true,
+     defaultPlaybackSpeed: 1.0,
 diff --git a/model.patch b/model.patch
-index 41e8122..e69de29 100644
+index 099a04d..e69de29 100644
 --- a/model.patch
 +++ b/model.patch
-@@ -1,38 +0,0 @@
--diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
--index 4bac28f..542b9ca 100644
----- a/frontend/app/(tabs)/settings.tsx
--+++ b/frontend/app/(tabs)/settings.tsx
--@@ -27,6 +27,7 @@ export default function SettingsScreen() {
--     artistSeparators: [';', '/', ','],
--     genreSeparators: [';', '/', ','],
--     enableBackgroundPlay: true,
--+    alwaysBackgroundPlay: false,
--     enableVideoPlayback: true,
--     enableSubtitles: true,
--     defaultPlaybackSpeed: 1.0,
--@@ -173,6 +174,13 @@ export default function SettingsScreen() {
--             value={settings.enableBackgroundPlay}
--             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
--           />
--+          <SettingSwitch
--+            icon="infinite"
--+            title="Always Play in Background"
--+            subtitle="Never stop playback when minimizing app"
--+            value={settings.alwaysBackgroundPlay || false}
--+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
--+          />
--         </View>
-- 
--         <Text style={styles.sectionTitle}>Video</Text>
+@@ -1,56 +0,0 @@
 -diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
--index 500f3bd..e1cc07e 100644
+-index e1cc07e..daa61fa 100644
 ---- a/frontend/src/types/media.ts
 -+++ b/frontend/src/types/media.ts
--@@ -98,6 +98,7 @@ export interface AppSettings {
+-@@ -98,7 +98,7 @@ export interface AppSettings {
 -   artistSeparators: string[];
 -   genreSeparators: string[];
 -   enableBackgroundPlay: boolean;
--+  alwaysBackgroundPlay?: boolean;
+--  alwaysBackgroundPlay?: boolean;
+-+  alwaysBackgroundPlay: boolean;
 -   enableVideoPlayback: boolean;
 -   enableSubtitles: boolean;
 -   defaultPlaybackSpeed: number;
+-diff --git a/model.patch b/model.patch
+-index 41e8122..e69de29 100644
+---- a/model.patch
+-+++ b/model.patch
+-@@ -1,38 +0,0 @@
+--diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+--index 4bac28f..542b9ca 100644
+----- a/frontend/app/(tabs)/settings.tsx
+--+++ b/frontend/app/(tabs)/settings.tsx
+--@@ -27,6 +27,7 @@ export default function SettingsScreen() {
+--     artistSeparators: [';', '/', ','],
+--     genreSeparators: [';', '/', ','],
+--     enableBackgroundPlay: true,
+--+    alwaysBackgroundPlay: false,
+--     enableVideoPlayback: true,
+--     enableSubtitles: true,
+--     defaultPlaybackSpeed: 1.0,
+--@@ -173,6 +174,13 @@ export default function SettingsScreen() {
+--             value={settings.enableBackgroundPlay}
+--             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
+--           />
+--+          <SettingSwitch
+--+            icon="infinite"
+--+            title="Always Play in Background"
+--+            subtitle="Never stop playback when minimizing app"
+--+            value={settings.alwaysBackgroundPlay || false}
+--+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
+--+          />
+--         </View>
+-- 
+--         <Text style={styles.sectionTitle}>Video</Text>
+--diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
+--index 500f3bd..e1cc07e 100644
+----- a/frontend/src/types/media.ts
+--+++ b/frontend/src/types/media.ts
+--@@ -98,6 +98,7 @@ export interface AppSettings {
+--   artistSeparators: string[];
+--   genreSeparators: string[];
+--   enableBackgroundPlay: boolean;
+--+  alwaysBackgroundPlay?: boolean;
+--   enableVideoPlayback: boolean;
+--   enableSubtitles: boolean;
+--   defaultPlaybackSpeed: number;
