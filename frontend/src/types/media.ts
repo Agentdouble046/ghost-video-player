@@ -87,6 +87,7 @@ export interface Download {
 
 export interface AppSettings {
   theme: 'light' | 'dark' | 'auto';
+  customThemeColor: string;
   dynamicTheming: boolean;
   crossfadeDuration: number;
   replayGain: boolean;
@@ -103,6 +104,8 @@ export interface AppSettings {
   enableSubtitles: boolean;
   defaultPlaybackSpeed: number;
   enableGestures: boolean;
+  customBackground: string | null;
+  backgroundType: 'color' | 'image' | 'gif';
 }
 
 export interface PlayerState {
