@@ -1,28 +1,24 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "OmniPlayer",
+    "slug": "omni-player",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "frontend",
-    "userInterfaceStyle": "automatic",
+    "scheme": "omniplayer",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSMicrophoneUsageDescription": "Record audio for video capture",
-        "NSCameraUsageDescription": "Capture videos and photos",
-        "NSPhotoLibraryUsageDescription": "Access media files from gallery",
-        "NSPhotoLibraryAddUsageDescription": "Save media to your library",
-        "UIBackgroundModes": ["audio"],
-        "NSAppleMusicUsageDescription": "Access your music library"
-      }
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
     },
     "android": {
+      "package": "com.omniplayer.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#000"
+        "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
@@ -32,23 +28,24 @@
         "READ_MEDIA_VIDEO",
         "READ_MEDIA_IMAGES",
         "FOREGROUND_SERVICE",
-        "WAKE_LOCK"
-      ]
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+        "FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "WAKE_LOCK",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "MODIFY_AUDIO_SETTINGS",
+        "VIBRATE"
+      ],
+      "allowBackup": false,
+      "hardwareAcceleration": true,
+      "largeHeap": true
     },
     "plugins": [
       "expo-router",
       [
-        "expo-splash-screen",
+        "expo-media-library",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#000"
+          "photosPermission": "Allow OmniPlayer to access your media files",
+          "savePhotosPermission": "Allow OmniPlayer to save media files"
         }
       ]
     ],
