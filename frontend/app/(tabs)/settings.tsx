@@ -128,8 +128,40 @@ export default function SettingsScreen() {
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+        {/* Media Scanner */}
+        <Text style={styles.sectionTitle}>Media Library</Text>
+        <View style={styles.section}>
+          <TouchableOpacity 
+            style={styles.settingItem}
+            onPress={() => setShowMediaScanner(true)}
+          >
+            <View style={styles.settingLeft}>
+              <Ionicons name='scan' size={24} color={themeColor} />
+              <View style={styles.settingText}>
+                <Text style={styles.settingTitle}>Scan Local Media</Text>
+                <Text style={styles.settingSubtitle}>Find audio & video files on device</Text>
+              </View>
+            </View>
+            <Ionicons name='chevron-forward' size={20} color='#666' />
+          </TouchableOpacity>
+        </View>
+
+        {/* Appearance */}
         <Text style={styles.sectionTitle}>Appearance</Text>
         <View style={styles.section}>
+          <TouchableOpacity 
+            style={styles.settingItem}
+            onPress={() => setShowThemeCustomizer(true)}
+          >
+            <View style={styles.settingLeft}>
+              <Ionicons name='color-palette' size={24} color={themeColor} />
+              <View style={styles.settingText}>
+                <Text style={styles.settingTitle}>Theme & Background</Text>
+                <Text style={styles.settingSubtitle}>Customize colors and backgrounds</Text>
+              </View>
+            </View>
+            <Ionicons name='chevron-forward' size={20} color='#666' />
+          </TouchableOpacity>
           <SettingSwitch
             icon="color-palette"
             title="Dynamic Theming"
