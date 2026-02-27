@@ -6,13 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Switch,
-  TextInput,
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import api from '../../utils/api';
-import { AppSettings } from '../../types/media';
+import api from '../../../src/utils/api';
+import { AppSettings } from '../../../src/types/media';
 
 export default function SettingsScreen() {
   const [settings, setSettings] = useState<AppSettings>({
@@ -122,7 +121,6 @@ export default function SettingsScreen() {
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-        {/* Appearance */}
         <Text style={styles.sectionTitle}>Appearance</Text>
         <View style={styles.section}>
           <SettingSwitch
@@ -141,7 +139,6 @@ export default function SettingsScreen() {
           />
         </View>
 
-        {/* Playback */}
         <Text style={styles.sectionTitle}>Playback</Text>
         <View style={styles.section}>
           <SettingItem
@@ -178,7 +175,6 @@ export default function SettingsScreen() {
           />
         </View>
 
-        {/* Video */}
         <Text style={styles.sectionTitle}>Video</Text>
         <View style={styles.section}>
           <SettingSwitch
@@ -202,7 +198,6 @@ export default function SettingsScreen() {
           />
         </View>
 
-        {/* Library */}
         <Text style={styles.sectionTitle}>Library</Text>
         <View style={styles.section}>
           <SettingItem
@@ -225,7 +220,6 @@ export default function SettingsScreen() {
           />
         </View>
 
-        {/* About */}
         <Text style={styles.sectionTitle}>About</Text>
         <View style={styles.section}>
           <SettingItem
@@ -247,7 +241,6 @@ export default function SettingsScreen() {
           />
         </View>
 
-        {/* Storage */}
         <Text style={styles.sectionTitle}>Storage</Text>
         <View style={styles.section}>
           <TouchableOpacity

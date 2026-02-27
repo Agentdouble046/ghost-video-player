@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { usePlayerStore } from '../../store/usePlayerStore';
-import api from '../../utils/api';
-import { Track } from '../../types/media';
-import { formatDuration } from '../../utils/formatters';
+import { usePlayerStore } from '../../../src/store/usePlayerStore';
+import api from '../../../src/utils/api';
+import { Track } from '../../../src/types/media';
+import { formatDuration } from '../../../src/utils/formatters';
 
 export default function SearchScreen() {
   const { setQueue } = usePlayerStore();
@@ -47,7 +47,6 @@ export default function SearchScreen() {
     const index = searchResults.findIndex(t => t.id === track.id);
     setQueue(searchResults, index);
 
-    // Add to recent searches
     if (!recentSearches.includes(searchQuery)) {
       setRecentSearches([searchQuery, ...recentSearches.slice(0, 9)]);
     }
@@ -92,7 +91,6 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
           <Ionicons name="search" size={20} color="#B3B3B3" style={styles.searchIcon} />
@@ -112,7 +110,6 @@ export default function SearchScreen() {
         </View>
       </View>
 
-      {/* Content */}
       <View style={styles.content}>
         {isSearching ? (
           <View style={styles.loadingContainer}>

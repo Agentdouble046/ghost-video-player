@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLibraryStore } from '../../store/useLibraryStore';
-import { usePlayerStore } from '../../store/usePlayerStore';
-import api from '../../utils/api';
-import { Track } from '../../types/media';
-import { formatDuration } from '../../utils/formatters';
+import { useLibraryStore } from '../../../src/store/useLibraryStore';
+import { usePlayerStore } from '../../../src/store/usePlayerStore';
+import api from '../../../src/utils/api';
+import { Track } from '../../../src/types/media';
+import { formatDuration } from '../../../src/utils/formatters';
 
 const { width } = Dimensions.get('window');
 const VIDEO_WIDTH = (width - 48) / 2;
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   videoThumbnail: {
     width: VIDEO_WIDTH,
-    height: VIDEO_WIDTH * 0.56, // 16:9 aspect ratio
+    height: VIDEO_WIDTH * 0.56,
     borderRadius: 8,
     marginBottom: 8,
   },
