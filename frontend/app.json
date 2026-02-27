@@ -54,7 +54,8 @@
           "backgroundFetchInterval": 15
         }
       ],
-      "expo-task-manager"
+      "expo-task-manager",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
