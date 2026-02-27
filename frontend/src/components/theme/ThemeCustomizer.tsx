@@ -67,7 +67,7 @@ export default function ThemeCustomizer({ visible, onClose }: ThemeCustomizerPro
     if (!result.canceled && result.assets[0]) {
       const asset = result.assets[0];
       const base64 = await FileSystem.readAsStringAsync(asset.uri, {
-        encoding: FileSystem.EncodingType.Base64,
+        encoding: 'base64',
       });
       const imageUri = `data:image/jpeg;base64,${base64}`;
       setCustomBackground(imageUri, 'image');
@@ -92,7 +92,7 @@ export default function ThemeCustomizer({ visible, onClose }: ThemeCustomizerPro
       const asset = result.assets[0];
       if (asset.uri.toLowerCase().endsWith('.gif')) {
         const base64 = await FileSystem.readAsStringAsync(asset.uri, {
-          encoding: FileSystem.EncodingType.Base64,
+          encoding: 'base64',
         });
         const gifUri = `data:image/gif;base64,${base64}`;
         setCustomBackground(gifUri, 'gif');

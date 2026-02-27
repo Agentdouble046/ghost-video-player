@@ -66,7 +66,7 @@ export default function MediaScanner() {
 
           // Read file as base64
           const base64 = await FileSystem.readAsStringAsync(assetInfo.localUri, {
-            encoding: FileSystem.EncodingType.Base64,
+            encoding: 'base64',
           });
 
           const mimeType = asset.mediaType === 'audio' ? 'audio/mpeg' : 'video/mp4';
