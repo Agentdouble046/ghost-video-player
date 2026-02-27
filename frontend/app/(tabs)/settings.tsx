@@ -173,6 +173,13 @@ export default function SettingsScreen() {
             value={settings.enableBackgroundPlay}
             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
           />
+          <SettingSwitch
+            icon="infinite"
+            title="Always Play in Background"
+            subtitle="Never stop playback when minimizing app"
+            value={settings.alwaysBackgroundPlay || false}
+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
+          />
         </View>
 
         <Text style={styles.sectionTitle}>Video</Text>
