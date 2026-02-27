@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
+import MiniPlayer from '../src/components/player/MiniPlayer';
 
 export default function RootLayout() {
   return (
@@ -7,6 +8,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
+      <MiniPlayer />
     </View>
   );
 }
