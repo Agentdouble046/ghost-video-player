@@ -174,6 +174,7 @@ class AppSettings(BaseModel):
     artistSeparators: List[str] = [";", "/", ","]
     genreSeparators: List[str] = [";", "/", ","]
     enableBackgroundPlay: bool = True
+    alwaysBackgroundPlay: bool = True
     enableVideoPlayback: bool = True
     enableSubtitles: bool = True
     defaultPlaybackSpeed: float = 1.0
