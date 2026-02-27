@@ -1,399 +1,415 @@
-diff --git a/frontend/.env b/frontend/.env
-index 2192a7f..30f3046 100644
---- a/frontend/.env
-+++ b/frontend/.env
-@@ -1,5 +1,6 @@
- EXPO_TUNNEL_SUBDOMAIN=omni-music-app
--EXPO_PACKAGER_HOSTNAME=https://omni-music-app.preview.emergentagent.com
-+EXPO_PACKAGER_HOSTNAME=omni-music-app.preview.emergentagent.com
-+EXPO_PACKAGER_PROXY_URL=https://omni-music-app.preview.emergentagent.com
- EXPO_PUBLIC_BACKEND_URL=https://omni-music-app.preview.emergentagent.com
--EXPO_USE_FAST_RESOLVER="1"
-+EXPO_USE_FAST_RESOLVER=1
- METRO_CACHE_ROOT=/app/frontend/.metro-cache
+diff --git a/backend/.env b/backend/.env
+index 0f4322c..50e6eec 100644
+--- a/backend/.env
++++ b/backend/.env
+@@ -1,2 +1,3 @@
+ MONGO_URL="mongodb://localhost:27017"
+-DB_NAME="test_database"
+\ No newline at end of file
++DB_NAME="test_database"
++CORS_ORIGINS=*
 \ No newline at end of file
 diff --git a/model.patch b/model.patch
-index aba8dd3..e69de29 100644
+index e365824..e69de29 100644
 --- a/model.patch
 +++ b/model.patch
-@@ -1,380 +0,0 @@
+@@ -1,399 +0,0 @@
+-diff --git a/frontend/.env b/frontend/.env
+-index 2192a7f..30f3046 100644
+---- a/frontend/.env
+-+++ b/frontend/.env
+-@@ -1,5 +1,6 @@
+- EXPO_TUNNEL_SUBDOMAIN=omni-music-app
+--EXPO_PACKAGER_HOSTNAME=https://omni-music-app.preview.emergentagent.com
+-+EXPO_PACKAGER_HOSTNAME=omni-music-app.preview.emergentagent.com
+-+EXPO_PACKAGER_PROXY_URL=https://omni-music-app.preview.emergentagent.com
+- EXPO_PUBLIC_BACKEND_URL=https://omni-music-app.preview.emergentagent.com
+--EXPO_USE_FAST_RESOLVER="1"
+-+EXPO_USE_FAST_RESOLVER=1
+- METRO_CACHE_ROOT=/app/frontend/.metro-cache
+-\ No newline at end of file
 -diff --git a/model.patch b/model.patch
--index 2ced982..e69de29 100644
+-index aba8dd3..e69de29 100644
 ---- a/model.patch
 -+++ b/model.patch
--@@ -1,375 +0,0 @@
---diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
---index 5dbbcb1..09bc181 100644
------ a/frontend/app/(tabs)/settings.tsx
---+++ b/frontend/app/(tabs)/settings.tsx
---@@ -352,18 +352,25 @@ export default function SettingsScreen() {
--- 
---       {/* YouTube Downloader Modal */}
---       {showYouTubeDownloader && (
----        <View style={styles.scannerModal}>
----          <View style={styles.scannerHeader}>
----            <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
----              <Ionicons name='close' size={28} color='#FFFFFF' />
----            </TouchableOpacity>
----            <Text style={styles.scannerTitle}>YouTube Downloader</Text>
----            <View style={{ width: 28 }} />
---+        <Modal
---+          visible={showYouTubeDownloader}
---+          animationType='slide'
---+          presentationStyle='pageSheet'
---+          onRequestClose={() => setShowYouTubeDownloader(false)}
---+        >
---+          <View style={styles.scannerModal}>
---+            <View style={styles.scannerHeader}>
---+              <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
---+                <Ionicons name='close' size={28} color='#FFFFFF' />
---+              </TouchableOpacity>
---+              <Text style={styles.scannerTitle}>YouTube Downloader</Text>
---+              <View style={{ width: 28 }} />
---+            </View>
---+            <ScrollView style={styles.scannerContent}>
---+              <YouTubeDownloader />
---+            </ScrollView>
---           </View>
----          <ScrollView style={styles.scannerContent}>
----            <YouTubeDownloader />
----          </ScrollView>
----        </View>
---+        </Modal>
---       )}
---     </SafeAreaView>
---   );
+-@@ -1,380 +0,0 @@
 --diff --git a/model.patch b/model.patch
---index b7daece..e69de29 100644
+--index 2ced982..e69de29 100644
 ----- a/model.patch
 --+++ b/model.patch
---@@ -1,329 +0,0 @@
+--@@ -1,375 +0,0 @@
 ---diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
----index d0446ef..5dbbcb1 100644
+---index 5dbbcb1..09bc181 100644
 ------ a/frontend/app/(tabs)/settings.tsx
 ---+++ b/frontend/app/(tabs)/settings.tsx
----@@ -150,6 +150,20 @@ export default function SettingsScreen() {
----             </View>
----             <Ionicons name='chevron-forward' size={20} color='#666' />
----           </TouchableOpacity>
----+          
----+          <TouchableOpacity 
----+            style={styles.settingItem}
----+            onPress={() => setShowYouTubeDownloader(true)}
----+          >
----+            <View style={styles.settingLeft}>
----+              <Ionicons name='logo-youtube' size={24} color='#FF0000' />
----+              <View style={styles.settingText}>
----+                <Text style={styles.settingTitle}>YouTube Downloader</Text>
----+                <Text style={styles.settingSubtitle}>Download videos & audio from YouTube</Text>
----+              </View>
----+            </View>
----+            <Ionicons name='chevron-forward' size={20} color='#666' />
----+          </TouchableOpacity>
----         </View>
+---@@ -352,18 +352,25 @@ export default function SettingsScreen() {
 --- 
----         {/* Appearance */}
----@@ -335,6 +349,22 @@ export default function SettingsScreen() {
----           </ScrollView>
----         </View>
+---       {/* YouTube Downloader Modal */}
+---       {showYouTubeDownloader && (
+----        <View style={styles.scannerModal}>
+----          <View style={styles.scannerHeader}>
+----            <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
+----              <Ionicons name='close' size={28} color='#FFFFFF' />
+----            </TouchableOpacity>
+----            <Text style={styles.scannerTitle}>YouTube Downloader</Text>
+----            <View style={{ width: 28 }} />
+---+        <Modal
+---+          visible={showYouTubeDownloader}
+---+          animationType='slide'
+---+          presentationStyle='pageSheet'
+---+          onRequestClose={() => setShowYouTubeDownloader(false)}
+---+        >
+---+          <View style={styles.scannerModal}>
+---+            <View style={styles.scannerHeader}>
+---+              <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
+---+                <Ionicons name='close' size={28} color='#FFFFFF' />
+---+              </TouchableOpacity>
+---+              <Text style={styles.scannerTitle}>YouTube Downloader</Text>
+---+              <View style={{ width: 28 }} />
+---+            </View>
+---+            <ScrollView style={styles.scannerContent}>
+---+              <YouTubeDownloader />
+---+            </ScrollView>
+---           </View>
+----          <ScrollView style={styles.scannerContent}>
+----            <YouTubeDownloader />
+----          </ScrollView>
+----        </View>
+---+        </Modal>
 ---       )}
----+
----+      {/* YouTube Downloader Modal */}
----+      {showYouTubeDownloader && (
----+        <View style={styles.scannerModal}>
----+          <View style={styles.scannerHeader}>
----+            <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
----+              <Ionicons name='close' size={28} color='#FFFFFF' />
----+            </TouchableOpacity>
----+            <Text style={styles.scannerTitle}>YouTube Downloader</Text>
----+            <View style={{ width: 28 }} />
----+          </View>
----+          <ScrollView style={styles.scannerContent}>
----+            <YouTubeDownloader />
----+          </ScrollView>
----+        </View>
----+      )}
 ---     </SafeAreaView>
 ---   );
---- }
 ---diff --git a/model.patch b/model.patch
----index 77a9602..e69de29 100644
+---index b7daece..e69de29 100644
 ------ a/model.patch
 ---+++ b/model.patch
----@@ -1,276 +0,0 @@
+---@@ -1,329 +0,0 @@
 ----diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
-----index 2bbacaa..3a6eec2 100644
+----index d0446ef..5dbbcb1 100644
 ------- a/frontend/app/(tabs)/settings.tsx
 ----+++ b/frontend/app/(tabs)/settings.tsx
-----@@ -50,7 +50,7 @@ export default function SettingsScreen() {
-----   const loadSettings = async () => {
-----     try {
-----       const data = await api.get('/settings');
------      setSettings(data);
-----+      setSettings(data as AppSettings);
-----     } catch (error) {
-----       console.error('Error loading settings:', error);
-----     }
+----@@ -150,6 +150,20 @@ export default function SettingsScreen() {
+----             </View>
+----             <Ionicons name='chevron-forward' size={20} color='#666' />
+----           </TouchableOpacity>
+----+          
+----+          <TouchableOpacity 
+----+            style={styles.settingItem}
+----+            onPress={() => setShowYouTubeDownloader(true)}
+----+          >
+----+            <View style={styles.settingLeft}>
+----+              <Ionicons name='logo-youtube' size={24} color='#FF0000' />
+----+              <View style={styles.settingText}>
+----+                <Text style={styles.settingTitle}>YouTube Downloader</Text>
+----+                <Text style={styles.settingSubtitle}>Download videos & audio from YouTube</Text>
+----+              </View>
+----+            </View>
+----+            <Ionicons name='chevron-forward' size={20} color='#666' />
+----+          </TouchableOpacity>
+----         </View>
+---- 
+----         {/* Appearance */}
+----@@ -335,6 +349,22 @@ export default function SettingsScreen() {
+----           </ScrollView>
+----         </View>
+----       )}
+----+
+----+      {/* YouTube Downloader Modal */}
+----+      {showYouTubeDownloader && (
+----+        <View style={styles.scannerModal}>
+----+          <View style={styles.scannerHeader}>
+----+            <TouchableOpacity onPress={() => setShowYouTubeDownloader(false)}>
+----+              <Ionicons name='close' size={28} color='#FFFFFF' />
+----+            </TouchableOpacity>
+----+            <Text style={styles.scannerTitle}>YouTube Downloader</Text>
+----+            <View style={{ width: 28 }} />
+----+          </View>
+----+          <ScrollView style={styles.scannerContent}>
+----+            <YouTubeDownloader />
+----+          </ScrollView>
+----+        </View>
+----+      )}
+----     </SafeAreaView>
+----   );
+---- }
 ----diff --git a/model.patch b/model.patch
-----index 6f920fd..e69de29 100644
+----index 77a9602..e69de29 100644
 ------- a/model.patch
 ----+++ b/model.patch
-----@@ -1,258 +0,0 @@
------diff --git a/frontend/app/(tabs)/library.tsx b/frontend/app/(tabs)/library.tsx
------index cce24aa..a1eef63 100644
--------- a/frontend/app/(tabs)/library.tsx
------+++ b/frontend/app/(tabs)/library.tsx
------@@ -66,7 +66,7 @@ export default function LibraryScreen() {
------       if (!result.canceled && result.assets) {
------         for (const asset of result.assets) {
------           const base64 = await FileSystem.readAsStringAsync(asset.uri, {
-------            encoding: FileSystem.EncodingType.Base64,
------+            encoding: 'base64',
------           });
------ 
------           const trackData = {
+----@@ -1,276 +0,0 @@
+-----diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+-----index 2bbacaa..3a6eec2 100644
+-------- a/frontend/app/(tabs)/settings.tsx
+-----+++ b/frontend/app/(tabs)/settings.tsx
+-----@@ -50,7 +50,7 @@ export default function SettingsScreen() {
+-----   const loadSettings = async () => {
+-----     try {
+-----       const data = await api.get('/settings');
+------      setSettings(data);
+-----+      setSettings(data as AppSettings);
+-----     } catch (error) {
+-----       console.error('Error loading settings:', error);
+-----     }
 -----diff --git a/model.patch b/model.patch
------index 26d7ff5..e69de29 100644
+-----index 6f920fd..e69de29 100644
 -------- a/model.patch
 -----+++ b/model.patch
------@@ -1,240 +0,0 @@
+-----@@ -1,258 +0,0 @@
+------diff --git a/frontend/app/(tabs)/library.tsx b/frontend/app/(tabs)/library.tsx
+------index cce24aa..a1eef63 100644
+--------- a/frontend/app/(tabs)/library.tsx
+------+++ b/frontend/app/(tabs)/library.tsx
+------@@ -66,7 +66,7 @@ export default function LibraryScreen() {
+------       if (!result.canceled && result.assets) {
+------         for (const asset of result.assets) {
+------           const base64 = await FileSystem.readAsStringAsync(asset.uri, {
+-------            encoding: FileSystem.EncodingType.Base64,
+------+            encoding: 'base64',
+------           });
+------ 
+------           const trackData = {
 ------diff --git a/model.patch b/model.patch
-------index 3038fce..e69de29 100644
+------index 26d7ff5..e69de29 100644
 --------- a/model.patch
 ------+++ b/model.patch
-------@@ -1,235 +0,0 @@
--------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
--------index 7f55faf..31700fd 100644
----------- a/frontend/app/(tabs)/settings.tsx
--------+++ b/frontend/app/(tabs)/settings.tsx
--------@@ -309,16 +309,26 @@ export default function SettingsScreen() {
--------       </ScrollView>
-------- 
--------       {/* Theme Customizer Modal */}
---------      <ThemeCustomizer
---------        visible={showThemeCustomizer}
---------        onClose={() => setShowThemeCustomizer(false)}
--------+      <ThemeCustomizer 
--------+        visible={showThemeCustomizer} 
--------+        onClose={() => setShowThemeCustomizer(false)} 
--------       />
-------- 
--------       {/* Media Scanner Modal */}
---------      <MediaScanner
---------        visible={showMediaScanner}
---------        onClose={() => setShowMediaScanner(false)}
---------      />
--------+      {showMediaScanner && (
--------+        <View style={styles.scannerModal}>
--------+          <View style={styles.scannerHeader}>
--------+            <TouchableOpacity onPress={() => setShowMediaScanner(false)}>
--------+              <Ionicons name='close' size={28} color='#FFFFFF' />
--------+            </TouchableOpacity>
--------+            <Text style={styles.scannerTitle}>Media Scanner</Text>
--------+            <View style={{ width: 28 }} />
--------+          </View>
--------+          <ScrollView style={styles.scannerContent}>
--------+            <MediaScanner />
--------+          </ScrollView>
--------+        </View>
--------+      )}
--------     </SafeAreaView>
--------   );
-------- }
--------@@ -403,4 +413,30 @@ const styles = StyleSheet.create({
--------     fontWeight: '600',
--------     color: '#FF3B30',
--------   },
--------+  scannerModal: {
--------+    position: 'absolute',
--------+    top: 0,
--------+    left: 0,
--------+    right: 0,
--------+    bottom: 0,
--------+    backgroundColor: '#000',
--------+    zIndex: 1000,
--------+  },
--------+  scannerHeader: {
--------+    flexDirection: 'row',
--------+    alignItems: 'center',
--------+    justifyContent: 'space-between',
--------+    paddingHorizontal: 16,
--------+    paddingVertical: 16,
--------+    borderBottomWidth: 1,
--------+    borderBottomColor: '#282828',
--------+  },
--------+  scannerTitle: {
--------+    fontSize: 18,
--------+    fontWeight: '600',
--------+    color: '#FFFFFF',
--------+  },
--------+  scannerContent: {
--------+    flex: 1,
--------+  },
-------- });
--------\ No newline at end of file
+------@@ -1,240 +0,0 @@
 -------diff --git a/model.patch b/model.patch
--------index 74da68b..e69de29 100644
+-------index 3038fce..e69de29 100644
 ---------- a/model.patch
 -------+++ b/model.patch
--------@@ -1,160 +0,0 @@
+-------@@ -1,235 +0,0 @@
 --------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
---------index 9de53f2..7f55faf 100644
+--------index 7f55faf..31700fd 100644
 ----------- a/frontend/app/(tabs)/settings.tsx
 --------+++ b/frontend/app/(tabs)/settings.tsx
---------@@ -46,14 +46,14 @@ export default function SettingsScreen() {
--------- 
---------   const loadSettings = async () => {
---------     try {
----------      const data = await api.get('/settings') as AppSettings;
---------+      const data = await api.get('/settings');
---------       setSettings(data);
---------     } catch (error) {
---------       console.error('Error loading settings:', error);
---------     }
---------   };
--------- 
----------  const updateSetting = async (key: keyof AppSettings, value: any) => {
---------+  const updateSetting = async (key, value) => {
---------     try {
---------       const updatedSettings = { ...settings, [key]: value };
---------       setSettings(updatedSettings);
---------@@ -128,8 +128,40 @@ export default function SettingsScreen() {
---------       </View>
--------- 
---------       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
---------+        {/* Media Scanner */}
---------+        <Text style={styles.sectionTitle}>Media Library</Text>
---------+        <View style={styles.section}>
---------+          <TouchableOpacity 
---------+            style={styles.settingItem}
---------+            onPress={() => setShowMediaScanner(true)}
---------+          >
---------+            <View style={styles.settingLeft}>
---------+              <Ionicons name='scan' size={24} color={themeColor} />
---------+              <View style={styles.settingText}>
---------+                <Text style={styles.settingTitle}>Scan Local Media</Text>
---------+                <Text style={styles.settingSubtitle}>Find audio & video files on device</Text>
---------+              </View>
---------+            </View>
---------+            <Ionicons name='chevron-forward' size={20} color='#666' />
---------+          </TouchableOpacity>
---------+        </View>
---------+
---------+        {/* Appearance */}
---------         <Text style={styles.sectionTitle}>Appearance</Text>
---------         <View style={styles.section}>
---------+          <TouchableOpacity 
---------+            style={styles.settingItem}
---------+            onPress={() => setShowThemeCustomizer(true)}
---------+          >
---------+            <View style={styles.settingLeft}>
---------+              <Ionicons name='color-palette' size={24} color={themeColor} />
---------+              <View style={styles.settingText}>
---------+                <Text style={styles.settingTitle}>Theme & Background</Text>
---------+                <Text style={styles.settingSubtitle}>Customize colors and backgrounds</Text>
---------+              </View>
---------+            </View>
---------+            <Ionicons name='chevron-forward' size={20} color='#666' />
---------+          </TouchableOpacity>
---------           <SettingSwitch
---------             icon="color-palette"
---------             title="Dynamic Theming"
---------@@ -275,6 +307,18 @@ export default function SettingsScreen() {
---------           </TouchableOpacity>
---------         </View>
+--------@@ -309,16 +309,26 @@ export default function SettingsScreen() {
 --------       </ScrollView>
---------+
---------+      {/* Theme Customizer Modal */}
---------+      <ThemeCustomizer
---------+        visible={showThemeCustomizer}
---------+        onClose={() => setShowThemeCustomizer(false)}
---------+      />
---------+
---------+      {/* Media Scanner Modal */}
---------+      <MediaScanner
---------+        visible={showMediaScanner}
---------+        onClose={() => setShowMediaScanner(false)}
---------+      />
+-------- 
+--------       {/* Theme Customizer Modal */}
+---------      <ThemeCustomizer
+---------        visible={showThemeCustomizer}
+---------        onClose={() => setShowThemeCustomizer(false)}
+--------+      <ThemeCustomizer 
+--------+        visible={showThemeCustomizer} 
+--------+        onClose={() => setShowThemeCustomizer(false)} 
+--------       />
+-------- 
+--------       {/* Media Scanner Modal */}
+---------      <MediaScanner
+---------        visible={showMediaScanner}
+---------        onClose={() => setShowMediaScanner(false)}
+---------      />
+--------+      {showMediaScanner && (
+--------+        <View style={styles.scannerModal}>
+--------+          <View style={styles.scannerHeader}>
+--------+            <TouchableOpacity onPress={() => setShowMediaScanner(false)}>
+--------+              <Ionicons name='close' size={28} color='#FFFFFF' />
+--------+            </TouchableOpacity>
+--------+            <Text style={styles.scannerTitle}>Media Scanner</Text>
+--------+            <View style={{ width: 28 }} />
+--------+          </View>
+--------+          <ScrollView style={styles.scannerContent}>
+--------+            <MediaScanner />
+--------+          </ScrollView>
+--------+        </View>
+--------+      )}
 --------     </SafeAreaView>
 --------   );
 -------- }
+--------@@ -403,4 +413,30 @@ const styles = StyleSheet.create({
+--------     fontWeight: '600',
+--------     color: '#FF3B30',
+--------   },
+--------+  scannerModal: {
+--------+    position: 'absolute',
+--------+    top: 0,
+--------+    left: 0,
+--------+    right: 0,
+--------+    bottom: 0,
+--------+    backgroundColor: '#000',
+--------+    zIndex: 1000,
+--------+  },
+--------+  scannerHeader: {
+--------+    flexDirection: 'row',
+--------+    alignItems: 'center',
+--------+    justifyContent: 'space-between',
+--------+    paddingHorizontal: 16,
+--------+    paddingVertical: 16,
+--------+    borderBottomWidth: 1,
+--------+    borderBottomColor: '#282828',
+--------+  },
+--------+  scannerTitle: {
+--------+    fontSize: 18,
+--------+    fontWeight: '600',
+--------+    color: '#FFFFFF',
+--------+  },
+--------+  scannerContent: {
+--------+    flex: 1,
+--------+  },
+-------- });
+--------\ No newline at end of file
 --------diff --git a/model.patch b/model.patch
---------index 2bc5193..e69de29 100644
+--------index 74da68b..e69de29 100644
 ----------- a/model.patch
 --------+++ b/model.patch
---------@@ -1,74 +0,0 @@
+--------@@ -1,160 +0,0 @@
 ---------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
----------index 542b9ca..929ffd8 100644
+---------index 9de53f2..7f55faf 100644
 ------------ a/frontend/app/(tabs)/settings.tsx
 ---------+++ b/frontend/app/(tabs)/settings.tsx
----------@@ -27,7 +27,7 @@ export default function SettingsScreen() {
----------     artistSeparators: [';', '/', ','],
----------     genreSeparators: [';', '/', ','],
----------     enableBackgroundPlay: true,
-----------    alwaysBackgroundPlay: false,
----------+    alwaysBackgroundPlay: true,
----------     enableVideoPlayback: true,
----------     enableSubtitles: true,
----------     defaultPlaybackSpeed: 1.0,
+---------@@ -46,14 +46,14 @@ export default function SettingsScreen() {
+--------- 
+---------   const loadSettings = async () => {
+---------     try {
+----------      const data = await api.get('/settings') as AppSettings;
+---------+      const data = await api.get('/settings');
+---------       setSettings(data);
+---------     } catch (error) {
+---------       console.error('Error loading settings:', error);
+---------     }
+---------   };
+--------- 
+----------  const updateSetting = async (key: keyof AppSettings, value: any) => {
+---------+  const updateSetting = async (key, value) => {
+---------     try {
+---------       const updatedSettings = { ...settings, [key]: value };
+---------       setSettings(updatedSettings);
+---------@@ -128,8 +128,40 @@ export default function SettingsScreen() {
+---------       </View>
+--------- 
+---------       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+---------+        {/* Media Scanner */}
+---------+        <Text style={styles.sectionTitle}>Media Library</Text>
+---------+        <View style={styles.section}>
+---------+          <TouchableOpacity 
+---------+            style={styles.settingItem}
+---------+            onPress={() => setShowMediaScanner(true)}
+---------+          >
+---------+            <View style={styles.settingLeft}>
+---------+              <Ionicons name='scan' size={24} color={themeColor} />
+---------+              <View style={styles.settingText}>
+---------+                <Text style={styles.settingTitle}>Scan Local Media</Text>
+---------+                <Text style={styles.settingSubtitle}>Find audio & video files on device</Text>
+---------+              </View>
+---------+            </View>
+---------+            <Ionicons name='chevron-forward' size={20} color='#666' />
+---------+          </TouchableOpacity>
+---------+        </View>
+---------+
+---------+        {/* Appearance */}
+---------         <Text style={styles.sectionTitle}>Appearance</Text>
+---------         <View style={styles.section}>
+---------+          <TouchableOpacity 
+---------+            style={styles.settingItem}
+---------+            onPress={() => setShowThemeCustomizer(true)}
+---------+          >
+---------+            <View style={styles.settingLeft}>
+---------+              <Ionicons name='color-palette' size={24} color={themeColor} />
+---------+              <View style={styles.settingText}>
+---------+                <Text style={styles.settingTitle}>Theme & Background</Text>
+---------+                <Text style={styles.settingSubtitle}>Customize colors and backgrounds</Text>
+---------+              </View>
+---------+            </View>
+---------+            <Ionicons name='chevron-forward' size={20} color='#666' />
+---------+          </TouchableOpacity>
+---------           <SettingSwitch
+---------             icon="color-palette"
+---------             title="Dynamic Theming"
+---------@@ -275,6 +307,18 @@ export default function SettingsScreen() {
+---------           </TouchableOpacity>
+---------         </View>
+---------       </ScrollView>
+---------+
+---------+      {/* Theme Customizer Modal */}
+---------+      <ThemeCustomizer
+---------+        visible={showThemeCustomizer}
+---------+        onClose={() => setShowThemeCustomizer(false)}
+---------+      />
+---------+
+---------+      {/* Media Scanner Modal */}
+---------+      <MediaScanner
+---------+        visible={showMediaScanner}
+---------+        onClose={() => setShowMediaScanner(false)}
+---------+      />
+---------     </SafeAreaView>
+---------   );
+--------- }
 ---------diff --git a/model.patch b/model.patch
----------index 099a04d..e69de29 100644
+---------index 2bc5193..e69de29 100644
 ------------ a/model.patch
 ---------+++ b/model.patch
----------@@ -1,56 +0,0 @@
-----------diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
-----------index e1cc07e..daa61fa 100644
-------------- a/frontend/src/types/media.ts
-----------+++ b/frontend/src/types/media.ts
-----------@@ -98,7 +98,7 @@ export interface AppSettings {
-----------   artistSeparators: string[];
-----------   genreSeparators: string[];
-----------   enableBackgroundPlay: boolean;
------------  alwaysBackgroundPlay?: boolean;
-----------+  alwaysBackgroundPlay: boolean;
-----------   enableVideoPlayback: boolean;
-----------   enableSubtitles: boolean;
-----------   defaultPlaybackSpeed: number;
+---------@@ -1,74 +0,0 @@
+----------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+----------index 542b9ca..929ffd8 100644
+------------- a/frontend/app/(tabs)/settings.tsx
+----------+++ b/frontend/app/(tabs)/settings.tsx
+----------@@ -27,7 +27,7 @@ export default function SettingsScreen() {
+----------     artistSeparators: [';', '/', ','],
+----------     genreSeparators: [';', '/', ','],
+----------     enableBackgroundPlay: true,
+-----------    alwaysBackgroundPlay: false,
+----------+    alwaysBackgroundPlay: true,
+----------     enableVideoPlayback: true,
+----------     enableSubtitles: true,
+----------     defaultPlaybackSpeed: 1.0,
 ----------diff --git a/model.patch b/model.patch
-----------index 41e8122..e69de29 100644
+----------index 099a04d..e69de29 100644
 ------------- a/model.patch
 ----------+++ b/model.patch
-----------@@ -1,38 +0,0 @@
------------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
------------index 4bac28f..542b9ca 100644
--------------- a/frontend/app/(tabs)/settings.tsx
------------+++ b/frontend/app/(tabs)/settings.tsx
------------@@ -27,6 +27,7 @@ export default function SettingsScreen() {
------------     artistSeparators: [';', '/', ','],
------------     genreSeparators: [';', '/', ','],
------------     enableBackgroundPlay: true,
------------+    alwaysBackgroundPlay: false,
------------     enableVideoPlayback: true,
------------     enableSubtitles: true,
------------     defaultPlaybackSpeed: 1.0,
------------@@ -173,6 +174,13 @@ export default function SettingsScreen() {
------------             value={settings.enableBackgroundPlay}
------------             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
------------           />
------------+          <SettingSwitch
------------+            icon="infinite"
------------+            title="Always Play in Background"
------------+            subtitle="Never stop playback when minimizing app"
------------+            value={settings.alwaysBackgroundPlay || false}
------------+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
------------+          />
------------         </View>
------------ 
------------         <Text style={styles.sectionTitle}>Video</Text>
+----------@@ -1,56 +0,0 @@
 -----------diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
------------index 500f3bd..e1cc07e 100644
+-----------index e1cc07e..daa61fa 100644
 -------------- a/frontend/src/types/media.ts
 -----------+++ b/frontend/src/types/media.ts
------------@@ -98,6 +98,7 @@ export interface AppSettings {
+-----------@@ -98,7 +98,7 @@ export interface AppSettings {
 -----------   artistSeparators: string[];
 -----------   genreSeparators: string[];
 -----------   enableBackgroundPlay: boolean;
------------+  alwaysBackgroundPlay?: boolean;
+------------  alwaysBackgroundPlay?: boolean;
+-----------+  alwaysBackgroundPlay: boolean;
 -----------   enableVideoPlayback: boolean;
 -----------   enableSubtitles: boolean;
 -----------   defaultPlaybackSpeed: number;
+-----------diff --git a/model.patch b/model.patch
+-----------index 41e8122..e69de29 100644
+-------------- a/model.patch
+-----------+++ b/model.patch
+-----------@@ -1,38 +0,0 @@
+------------diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+------------index 4bac28f..542b9ca 100644
+--------------- a/frontend/app/(tabs)/settings.tsx
+------------+++ b/frontend/app/(tabs)/settings.tsx
+------------@@ -27,6 +27,7 @@ export default function SettingsScreen() {
+------------     artistSeparators: [';', '/', ','],
+------------     genreSeparators: [';', '/', ','],
+------------     enableBackgroundPlay: true,
+------------+    alwaysBackgroundPlay: false,
+------------     enableVideoPlayback: true,
+------------     enableSubtitles: true,
+------------     defaultPlaybackSpeed: 1.0,
+------------@@ -173,6 +174,13 @@ export default function SettingsScreen() {
+------------             value={settings.enableBackgroundPlay}
+------------             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
+------------           />
+------------+          <SettingSwitch
+------------+            icon="infinite"
+------------+            title="Always Play in Background"
+------------+            subtitle="Never stop playback when minimizing app"
+------------+            value={settings.alwaysBackgroundPlay || false}
+------------+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
+------------+          />
+------------         </View>
+------------ 
+------------         <Text style={styles.sectionTitle}>Video</Text>
+------------diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
+------------index 500f3bd..e1cc07e 100644
+--------------- a/frontend/src/types/media.ts
+------------+++ b/frontend/src/types/media.ts
+------------@@ -98,6 +98,7 @@ export interface AppSettings {
+------------   artistSeparators: string[];
+------------   genreSeparators: string[];
+------------   enableBackgroundPlay: boolean;
+------------+  alwaysBackgroundPlay?: boolean;
+------------   enableVideoPlayback: boolean;
+------------   enableSubtitles: boolean;
+------------   defaultPlaybackSpeed: number;
