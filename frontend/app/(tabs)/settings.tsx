@@ -27,6 +27,7 @@ export default function SettingsScreen() {
     artistSeparators: [';', '/', ','],
     genreSeparators: [';', '/', ','],
     enableBackgroundPlay: true,
+    alwaysBackgroundPlay: false,
     enableVideoPlayback: true,
     enableSubtitles: true,
     defaultPlaybackSpeed: 1.0,
