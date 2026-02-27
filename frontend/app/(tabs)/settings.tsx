@@ -12,8 +12,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import api from '../../src/utils/api';
 import { AppSettings } from '../../src/types/media';
+import ThemeCustomizer from '../../src/components/theme/ThemeCustomizer';
+import MediaScanner from '../../src/components/media/MediaScanner';
+import { useThemeStore } from '../../src/store/useThemeStore';
 
 export default function SettingsScreen() {
+  const { themeColor } = useThemeStore();
+  const [showThemeCustomizer, setShowThemeCustomizer] = useState(false);
+  const [showMediaScanner, setShowMediaScanner] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     theme: 'dark',
     dynamicTheming: true,
