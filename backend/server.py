@@ -650,51 +650,154 @@ async def get_youtube_info(url: str = Query(...)):
 
 
 @api_router.post("/youtube/download")
-async def download_youtube(url: str, format_type: str = "audio"):
-    """Download YouTube video/audio"""
+async def download_youtube(
+    url: str, 
+    format_type: str = "audio",
+    quality: str = "best"
+):
+    """Download YouTube video/audio with advanced options"""
     try:
         import yt_dlp
         from pathlib import Path
+        import asyncio
         
         download_path = Path("/tmp/downloads")
         download_path.mkdir(exist_ok=True)
         
+        # Create download entry
+        download_id = str(uuid.uuid4())
+        download_entry = {
+            "id": download_id,
+            "url": url,
+            "title": "Fetching info...",
+            "type": format_type,
+            "status": "pending",
+            "progress": 0,
+            "filePath": None,
+            "metadata": {},
+            "createdAt": datetime.utcnow()
+        }
+        await db.downloads.insert_one(download_entry)
+        
+        # Configure yt-dlp options based on quality and format
+        base_opts = {
+            'quiet': False,
+            'no_warnings': False,
+            'outtmpl': str(download_path / '%(title)s.%(ext)s'),
+        }
+        
         if format_type == "audio":
+            # Audio download options
+            if quality == "best":
+                format_str = 'bestaudio/best'
+            elif quality == "high":
+                format_str = 'bestaudio[abr>=192]'
+            elif quality == "medium":
+                format_str = 'bestaudio[abr>=128]'
+            else:  # low
+                format_str = 'bestaudio[abr>=64]'
+            
             ydl_opts = {
-                'format': 'bestaudio/best',
-                'outtmpl': str(download_path / '%(title)s.%(ext)s'),
+                **base_opts,
+                'format': format_str,
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '192',
+                    'preferredquality': '192' if quality in ['best', 'high'] else '128',
                 }],
+                'writethumbnail': True,
+                'embedthumbnail': True,
             }
         else:
+            # Video download options with audio
+            if quality == "best":
+                format_str = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+            elif quality == "high":
+                format_str = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]'
+            elif quality == "medium":
+                format_str = 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]'
+            else:  # low
+                format_str = 'bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]'
+            
             ydl_opts = {
-                'format': 'best[ext=mp4]',
-                'outtmpl': str(download_path / '%(title)s.%(ext)s'),
+                **base_opts,
+                'format': format_str,
+                'merge_output_format': 'mp4',
+                'writethumbnail': True,
+                'embedthumbnail': True,
+                'subtitleslangs': ['en', 'es', 'fr'],
+                'writesubtitles': True,
+                'embedsubtitles': True,
             }
         
+        # Progress hook
+        async def progress_hook(d):
+            if d['status'] == 'downloading':
+                try:
+                    progress = float(d.get('_percent_str', '0%').replace('%', ''))
+                    await db.downloads.update_one(
+                        {"id": download_id},
+                        {"$set": {"status": "downloading", "progress": progress}}
+                    )
+                except:
+                    pass
+            elif d['status'] == 'finished':
+                await db.downloads.update_one(
+                    {"id": download_id},
+                    {"$set": {"status": "processing", "progress": 95}}
+                )
+        
+        ydl_opts['progress_hooks'] = [lambda d: asyncio.create_task(progress_hook(d))]
+        
+        # Download in background
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
             filename = ydl.prepare_filename(info)
             
+            # Update download entry with info
+            await db.downloads.update_one(
+                {"id": download_id},
+                {"$set": {
+                    "title": info.get('title'),
+                    "status": "completed",
+                    "progress": 100,
+                    "filePath": filename,
+                    "completedAt": datetime.utcnow(),
+                    "metadata": {
+                        "duration": info.get('duration'),
+                        "channel": info.get('channel'),
+                        "thumbnail": info.get('thumbnail'),
+                        "description": info.get('description', '')[:200],
+                    }
+                }}
+            )
+            
             # Create track entry
             track_data = {
-                'uri': filename,
-                'type': 'audio' if format_type == 'audio' else 'video',
-                'metadata': {
-                    'title': info.get('title'),
-                    'artist': info.get('channel'),
-                    'duration': info.get('duration'),
-                }
+                "uri": filename,
+                "type": format_type,
+                "metadata": {
+                    "title": info.get('title'),
+                    "artist": info.get('channel'),
+                    "duration": info.get('duration'),
+                },
+                "artwork": info.get('thumbnail'),
             }
             
             await db.tracks.insert_one(track_data)
             
-            return {"message": "Downloaded successfully", "filename": filename}
+            return {
+                "message": "Downloaded successfully", 
+                "filename": filename,
+                "download_id": download_id
+            }
     except Exception as e:
         logger.error(f"YouTube download error: {str(e)}")
+        # Update download status to failed
+        await db.downloads.update_one(
+            {"id": download_id},
+            {"$set": {"status": "failed", "progress": 0}}
+        )
         raise HTTPException(status_code=500, detail=str(e))
 
 
