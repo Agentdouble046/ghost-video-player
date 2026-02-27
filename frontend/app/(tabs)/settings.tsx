@@ -309,16 +309,26 @@ export default function SettingsScreen() {
       </ScrollView>
 
       {/* Theme Customizer Modal */}
-      <ThemeCustomizer
-        visible={showThemeCustomizer}
-        onClose={() => setShowThemeCustomizer(false)}
+      <ThemeCustomizer 
+        visible={showThemeCustomizer} 
+        onClose={() => setShowThemeCustomizer(false)} 
       />
 
       {/* Media Scanner Modal */}
-      <MediaScanner
-        visible={showMediaScanner}
-        onClose={() => setShowMediaScanner(false)}
-      />
+      {showMediaScanner && (
+        <View style={styles.scannerModal}>
+          <View style={styles.scannerHeader}>
+            <TouchableOpacity onPress={() => setShowMediaScanner(false)}>
+              <Ionicons name='close' size={28} color='#FFFFFF' />
+            </TouchableOpacity>
+            <Text style={styles.scannerTitle}>Media Scanner</Text>
+            <View style={{ width: 28 }} />
+          </View>
+          <ScrollView style={styles.scannerContent}>
+            <MediaScanner />
+          </ScrollView>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
