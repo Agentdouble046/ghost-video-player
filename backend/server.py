@@ -163,6 +163,7 @@ class DownloadCreate(BaseModel):
 class AppSettings(BaseModel):
     id: Optional[str] = "app_settings"
     theme: str = "dark"
+    customThemeColor: str = "#2196F3"
     dynamicTheming: bool = True
     crossfadeDuration: int = 0
     replayGain: bool = False
@@ -179,6 +180,8 @@ class AppSettings(BaseModel):
     enableSubtitles: bool = True
     defaultPlaybackSpeed: float = 1.0
     enableGestures: bool = True
+    customBackground: Optional[str] = None
+    backgroundType: str = "color"
 
 
 # ==================== ROUTES ====================
