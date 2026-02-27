@@ -1,14 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  Animated,
-  Modal,
-} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio, AVPlaybackStatus, InterruptionModeAndroid } from 'expo-av';
 import Slider from '@react-native-community/slider';
@@ -16,7 +7,7 @@ import { usePlayerStore } from '../../store/usePlayerStore';
 import { formatDuration } from '../../utils/formatters';
 import api from '../../utils/api';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function MiniPlayer() {
   const {
@@ -24,8 +15,6 @@ export default function MiniPlayer() {
     isPlaying,
     position,
     duration,
-    volume,
-    playbackSpeed,
     repeatMode,
     shuffleMode,
     setIsPlaying,
@@ -39,7 +28,6 @@ export default function MiniPlayer() {
 
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [showFullPlayer, setShowFullPlayer] = useState(false);
-  const slideAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     configureAudio();
@@ -180,7 +168,7 @@ export default function MiniPlayer() {
             <Image source={{ uri: currentTrack.artwork }} style={styles.miniArtwork} />
           ) : (
             <View style={[styles.miniArtwork, styles.placeholderArtwork]}>
-              <Ionicons name="musical-note" size={20} color="#FFFFFF" />
+              <Ionicons name='musical-note' size={20} color='#FFFFFF' />
             </View>
           )}
 
@@ -194,38 +182,29 @@ export default function MiniPlayer() {
           </View>
 
           <TouchableOpacity onPress={togglePlayPause} style={styles.miniPlayButton}>
-            <Ionicons
-              name={isPlaying ? 'pause' : 'play'}
-              size={28}
-              color="#FFFFFF"
-            />
+            <Ionicons name={isPlaying ? 'pause' : 'play'} size={28} color='#FFFFFF' />
           </TouchableOpacity>
         </View>
 
         <View style={styles.miniProgressBar}>
-          <View
-            style={[
-              styles.miniProgressFill,
-              { width: `${(position / duration) * 100 || 0}%` },
-            ]}
-          />
+          <View style={[styles.miniProgressFill, { width: `${(position / duration) * 100 || 0}%` }]} />
         </View>
       </TouchableOpacity>
 
       <Modal
         visible={showFullPlayer}
-        animationType="slide"
-        presentationStyle="fullScreen"
+        animationType='slide'
+        presentationStyle='fullScreen'
         onRequestClose={() => setShowFullPlayer(false)}
       >
         <View style={styles.fullPlayerContainer}>
           <View style={styles.fullPlayerHeader}>
             <TouchableOpacity onPress={() => setShowFullPlayer(false)}>
-              <Ionicons name="chevron-down" size={28} color="#FFFFFF" />
+              <Ionicons name='chevron-down' size={28} color='#FFFFFF' />
             </TouchableOpacity>
             <Text style={styles.fullPlayerHeaderTitle}>Now Playing</Text>
             <TouchableOpacity>
-              <Ionicons name="ellipsis-vertical" size={24} color="#FFFFFF" />
+              <Ionicons name='ellipsis-vertical' size={24} color='#FFFFFF' />
             </TouchableOpacity>
           </View>
 
@@ -234,7 +213,7 @@ export default function MiniPlayer() {
               <Image source={{ uri: currentTrack.artwork }} style={styles.fullArtwork} />
             ) : (
               <View style={[styles.fullArtwork, styles.placeholderArtwork]}>
-                <Ionicons name="musical-note" size={120} color="#FFFFFF" />
+                <Ionicons name='musical-note' size={120} color='#FFFFFF' />
               </View>
             )}
           </View>
@@ -255,9 +234,9 @@ export default function MiniPlayer() {
               minimumValue={0}
               maximumValue={duration || 1}
               onSlidingComplete={handleSeek}
-              minimumTrackTintColor="#1DB954"
-              maximumTrackTintColor="#404040"
-              thumbTintColor="#FFFFFF"
+              minimumTrackTintColor='#1DB954'
+              maximumTrackTintColor='#404040'
+              thumbTintColor='#FFFFFF'
             />
             <View style={styles.timeContainer}>
               <Text style={styles.timeText}>{formatDuration(position)}</Text>
@@ -267,27 +246,19 @@ export default function MiniPlayer() {
 
           <View style={styles.controlsContainer}>
             <TouchableOpacity onPress={toggleShuffle} style={styles.controlButton}>
-              <Ionicons
-                name="shuffle"
-                size={24}
-                color={shuffleMode ? '#1DB954' : '#B3B3B3'}
-              />
+              <Ionicons name='shuffle' size={24} color={shuffleMode ? '#1DB954' : '#B3B3B3'} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handlePrevious} style={styles.controlButton}>
-              <Ionicons name="play-skip-back" size={36} color="#FFFFFF" />
+              <Ionicons name='play-skip-back' size={36} color='#FFFFFF' />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={togglePlayPause} style={styles.playPauseButton}>
-              <Ionicons
-                name={isPlaying ? 'pause' : 'play'}
-                size={40}
-                color="#000000"
-              />
+              <Ionicons name={isPlaying ? 'pause' : 'play'} size={40} color='#000000' />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleNext} style={styles.controlButton}>
-              <Ionicons name="play-skip-forward" size={36} color="#FFFFFF" />
+              <Ionicons name='play-skip-forward' size={36} color='#FFFFFF' />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleRepeat} style={styles.controlButton}>
@@ -301,13 +272,13 @@ export default function MiniPlayer() {
 
           <View style={styles.additionalControls}>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="heart-outline" size={24} color="#FFFFFF" />
+              <Ionicons name='heart-outline' size={24} color='#FFFFFF' />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="add-circle-outline" size={24} color="#FFFFFF" />
+              <Ionicons name='add-circle-outline' size={24} color='#FFFFFF' />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="share-outline" size={24} color="#FFFFFF" />
+              <Ionicons name='share-outline' size={24} color='#FFFFFF' />
             </TouchableOpacity>
           </View>
         </View>
