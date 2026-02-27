@@ -66,7 +66,7 @@ export default function LibraryScreen() {
       if (!result.canceled && result.assets) {
         for (const asset of result.assets) {
           const base64 = await FileSystem.readAsStringAsync(asset.uri, {
-            encoding: FileSystem.EncodingType.Base64,
+            encoding: 'base64',
           });
 
           const trackData = {
