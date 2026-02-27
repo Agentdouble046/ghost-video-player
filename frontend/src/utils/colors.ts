@@ -2,7 +2,7 @@
 export const extractDominantColor = (base64Image: string): string => {
   // In a real implementation, you would use a library like react-native-image-colors
   // For now, return a default color
-  return '#1DB954';
+  return '#2196F3';
 };
 
 export const lightenColor = (color: string, amount: number): string => {

@@ -234,7 +234,7 @@ export default function MiniPlayer() {
               minimumValue={0}
               maximumValue={duration || 1}
               onSlidingComplete={handleSeek}
-              minimumTrackTintColor='#1DB954'
+              minimumTrackTintColor='#2196F3'
               maximumTrackTintColor='#404040'
               thumbTintColor='#FFFFFF'
             />
@@ -246,7 +246,7 @@ export default function MiniPlayer() {
 
           <View style={styles.controlsContainer}>
             <TouchableOpacity onPress={toggleShuffle} style={styles.controlButton}>
-              <Ionicons name='shuffle' size={24} color={shuffleMode ? '#1DB954' : '#B3B3B3'} />
+              <Ionicons name='shuffle' size={24} color={shuffleMode ? '#2196F3' : '#B3B3B3'} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handlePrevious} style={styles.controlButton}>
@@ -265,7 +265,7 @@ export default function MiniPlayer() {
               <Ionicons
                 name={repeatMode === 'one' ? 'repeat-outline' : 'repeat'}
                 size={24}
-                color={repeatMode !== 'off' ? '#1DB954' : '#B3B3B3'}
+                color={repeatMode !== 'off' ? '#2196F3' : '#B3B3B3'}
               />
             </TouchableOpacity>
           </View>
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   },
   miniProgressFill: {
     height: '100%',
-    backgroundColor: '#1DB954',
+    backgroundColor: '#2196F3',
   },
   fullPlayerContainer: {
     flex: 1,

@@ -77,7 +77,7 @@ export default function HomeScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#1DB954" />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#2196F3" />
         }
       >
         {/* Header */}
@@ -91,17 +91,17 @@ export default function HomeScreen() {
         {/* Quick Stats */}
         <View style={styles.statsContainer}>
           <View style={styles.statCard}>
-            <Ionicons name="musical-notes" size={32} color="#1DB954" />
+            <Ionicons name="musical-notes" size={32} color="#2196F3" />
             <Text style={styles.statNumber}>{tracks.length}</Text>
             <Text style={styles.statLabel}>Tracks</Text>
           </View>
           <View style={styles.statCard}>
-            <Ionicons name="albums" size={32} color="#1DB954" />
+            <Ionicons name="albums" size={32} color="#2196F3" />
             <Text style={styles.statNumber}>{albums.length}</Text>
             <Text style={styles.statLabel}>Albums</Text>
           </View>
           <View style={styles.statCard}>
-            <Ionicons name="list" size={32} color="#1DB954" />
+            <Ionicons name="list" size={32} color="#2196F3" />
             <Text style={styles.statNumber}>{playlists.length}</Text>
             <Text style={styles.statLabel}>Playlists</Text>
           </View>
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   addButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1DB954',
+    backgroundColor: '#2196F3',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 24,

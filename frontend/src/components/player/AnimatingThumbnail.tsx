@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   glow: {
     position: 'absolute',
     borderRadius: 12,
-    backgroundColor: '#1DB954',
+    backgroundColor: '#2196F3',
     opacity: 0.2,
     zIndex: -1,
   },

@@ -72,7 +72,7 @@ export default function SettingsScreen() {
   }) => (
     <TouchableOpacity style={styles.settingItem} onPress={onPress}>
       <View style={styles.settingLeft}>
-        <Ionicons name={icon as any} size={24} color="#1DB954" />
+        <Ionicons name={icon as any} size={24} color="#2196F3" />
         <View style={styles.settingText}>
           <Text style={styles.settingTitle}>{title}</Text>
           {subtitle && <Text style={styles.settingSubtitle}>{subtitle}</Text>}
@@ -100,7 +100,7 @@ export default function SettingsScreen() {
   }) => (
     <View style={styles.settingItem}>
       <View style={styles.settingLeft}>
-        <Ionicons name={icon as any} size={24} color="#1DB954" />
+        <Ionicons name={icon as any} size={24} color="#2196F3" />
         <View style={styles.settingText}>
           <Text style={styles.settingTitle}>{title}</Text>
           {subtitle && <Text style={styles.settingSubtitle}>{subtitle}</Text>}
@@ -109,7 +109,7 @@ export default function SettingsScreen() {
       <Switch
         value={value}
         onValueChange={onValueChange}
-        trackColor={{ false: '#3e3e3e', true: '#1DB954' }}
+        trackColor={{ false: '#3e3e3e', true: '#2196F3' }}
         thumbColor="#FFFFFF"
       />
     </View>

@@ -113,7 +113,7 @@ export default function SearchScreen() {
       <View style={styles.content}>
         {isSearching ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#1DB954" />
+            <ActivityIndicator size="large" color="#2196F3" />
           </View>
         ) : searchResults.length > 0 ? (
           <>
@@ -167,19 +167,19 @@ export default function SearchScreen() {
             <View style={styles.searchTipsContainer}>
               <Text style={styles.searchTipsTitle}>Search Tips</Text>
               <View style={styles.tipItem}>
-                <Ionicons name="musical-note" size={16} color="#1DB954" />
+                <Ionicons name="musical-note" size={16} color="#2196F3" />
                 <Text style={styles.tipText}>Search by song title</Text>
               </View>
               <View style={styles.tipItem}>
-                <Ionicons name="person" size={16} color="#1DB954" />
+                <Ionicons name="person" size={16} color="#2196F3" />
                 <Text style={styles.tipText}>Search by artist name</Text>
               </View>
               <View style={styles.tipItem}>
-                <Ionicons name="albums" size={16} color="#1DB954" />
+                <Ionicons name="albums" size={16} color="#2196F3" />
                 <Text style={styles.tipText}>Search by album name</Text>
               </View>
               <View style={styles.tipItem}>
-                <Ionicons name="text" size={16} color="#1DB954" />
+                <Ionicons name="text" size={16} color="#2196F3" />
                 <Text style={styles.tipText}>Search by lyrics</Text>
               </View>
             </View>
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
   },
   clearAllText: {
     fontSize: 14,
-    color: '#1DB954',
+    color: '#2196F3',
     fontWeight: '600',
   },
   recentItem: {

@@ -22,7 +22,7 @@ export default function WaveformSeekbar({
   waveform,
   progress,
   duration,
-  color = '#1DB954'
+  color = '#2196F3'
 }: WaveformSeekbarProps) {
   const barWidth = width / waveform.length;
   const maxHeight = 60;
