@@ -574,6 +574,175 @@ async def search(q: str = Query(...)):
     }
 
 
+# YouTube Download routes
+@api_router.post("/youtube/search")
+async def search_youtube(query: str = Query(...)):
+    """Search YouTube videos"""
+    try:
+        import yt_dlp
+        
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+        }
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            result = ydl.extract_info(f"ytsearch10:{query}", download=False)
+            
+            videos = []
+            if result and 'entries' in result:
+                for entry in result['entries']:
+                    if entry:
+                        videos.append({
+                            'id': entry.get('id'),
+                            'title': entry.get('title'),
+                            'thumbnail': entry.get('thumbnail'),
+                            'duration': entry.get('duration'),
+                            'channel': entry.get('channel'),
+                            'url': f"https://www.youtube.com/watch?v={entry.get('id')}"
+                        })
+            
+            return {"results": videos}
+    except Exception as e:
+        logger.error(f"YouTube search error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/youtube/info")
+async def get_youtube_info(url: str = Query(...)):
+    """Get YouTube video info"""
+    try:
+        import yt_dlp
+        
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+        }
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+            
+            return {
+                'id': info.get('id'),
+                'title': info.get('title'),
+                'thumbnail': info.get('thumbnail'),
+                'duration': info.get('duration'),
+                'description': info.get('description'),
+                'channel': info.get('channel'),
+                'formats': [
+                    {
+                        'format_id': f.get('format_id'),
+                        'ext': f.get('ext'),
+                        'quality': f.get('quality'),
+                        'filesize': f.get('filesize'),
+                    }
+                    for f in info.get('formats', [])[:10]
+                ]
+            }
+    except Exception as e:
+        logger.error(f"YouTube info error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/youtube/download")
+async def download_youtube(url: str, format_type: str = "audio"):
+    """Download YouTube video/audio"""
+    try:
+        import yt_dlp
+        from pathlib import Path
+        
+        download_path = Path("/tmp/downloads")
+        download_path.mkdir(exist_ok=True)
+        
+        if format_type == "audio":
+            ydl_opts = {
+                'format': 'bestaudio/best',
+                'outtmpl': str(download_path / '%(title)s.%(ext)s'),
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+                }],
+            }
+        else:
+            ydl_opts = {
+                'format': 'best[ext=mp4]',
+                'outtmpl': str(download_path / '%(title)s.%(ext)s'),
+            }
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+            filename = ydl.prepare_filename(info)
+            
+            # Create track entry
+            track_data = {
+                'uri': filename,
+                'type': 'audio' if format_type == 'audio' else 'video',
+                'metadata': {
+                    'title': info.get('title'),
+                    'artist': info.get('channel'),
+                    'duration': info.get('duration'),
+                }
+            }
+            
+            await db.tracks.insert_one(track_data)
+            
+            return {"message": "Downloaded successfully", "filename": filename}
+    except Exception as e:
+        logger.error(f"YouTube download error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Color extraction route
+@api_router.post("/artwork/colors")
+async def extract_colors(image_base64: str):
+    """Extract dominant colors from artwork"""
+    try:
+        from PIL import Image
+        import io
+        import base64
+        
+        # Decode base64 image
+        image_data = base64.b64decode(image_base64.split(',')[1] if ',' in image_base64 else image_base64)
+        image = Image.open(io.BytesIO(image_data))
+        image = image.resize((150, 150))
+        
+        # Get colors
+        pixels = list(image.getdata())
+        
+        # Simple color extraction (get most common colors)
+        from collections import Counter
+        color_counts = Counter(pixels)
+        most_common = color_counts.most_common(5)
+        
+        colors = [f"#{r:02x}{g:02x}{b:02x}" for (r, g, b), _ in most_common]
+        
+        return {"colors": colors, "primary": colors[0] if colors else "#1DB954"}
+    except Exception as e:
+        logger.error(f"Color extraction error: {str(e)}")
+        return {"colors": ["#1DB954"], "primary": "#1DB954"}
+
+
+# Audio analysis routes
+@api_router.get("/audio/waveform/{track_id}")
+async def get_waveform(track_id: str):
+    """Generate waveform data for track"""
+    try:
+        track = await db.tracks.find_one({"id": track_id})
+        if not track:
+            raise HTTPException(status_code=404, detail="Track not found")
+        
+        # Generate mock waveform data (in production, use actual audio analysis)
+        import random
+        waveform = [random.randint(20, 100) for _ in range(200)]
+        
+        return {"waveform": waveform}
+    except Exception as e:
+        logger.error(f"Waveform generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
