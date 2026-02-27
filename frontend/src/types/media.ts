@@ -98,7 +98,7 @@ export interface AppSettings {
   artistSeparators: string[];
   genreSeparators: string[];
   enableBackgroundPlay: boolean;
-  alwaysBackgroundPlay?: boolean;
+  alwaysBackgroundPlay: boolean;
   enableVideoPlayback: boolean;
   enableSubtitles: boolean;
   defaultPlaybackSpeed: number;
