@@ -9,14 +9,31 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Record audio for video capture",
+        "NSCameraUsageDescription": "Capture videos and photos",
+        "NSPhotoLibraryUsageDescription": "Access media files from gallery",
+        "NSPhotoLibraryAddUsageDescription": "Save media to your library",
+        "UIBackgroundModes": ["audio"],
+        "NSAppleMusicUsageDescription": "Access your music library"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_MEDIA_AUDIO",
+        "READ_MEDIA_VIDEO",
+        "READ_MEDIA_IMAGES",
+        "FOREGROUND_SERVICE",
+        "WAKE_LOCK"
+      ]
     },
     "web": {
       "bundler": "metro",
