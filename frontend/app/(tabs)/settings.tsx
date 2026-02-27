@@ -150,6 +150,20 @@ export default function SettingsScreen() {
             </View>
             <Ionicons name='chevron-forward' size={20} color='#666' />
           </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.settingItem}
+            onPress={() => setShowYouTubeDownloader(true)}
+          >
+            <View style={styles.settingLeft}>
+              <Ionicons name='logo-youtube' size={24} color='#FF0000' />
+              <View style={styles.settingText}>
+                <Text style={styles.settingTitle}>YouTube Downloader</Text>
+                <Text style={styles.settingSubtitle}>Download videos & audio from YouTube</Text>
+              </View>
+            </View>
+            <Ionicons name='chevron-forward' size={20} color='#666' />
+          </TouchableOpacity>
         </View>
 
         {/* Appearance */}
