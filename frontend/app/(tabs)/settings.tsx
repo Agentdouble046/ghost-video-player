@@ -53,7 +53,7 @@ export default function SettingsScreen() {
     }
   };
 
-  const updateSetting = async (key: keyof AppSettings, value: any) => {
+  const updateSetting = async (key, value) => {
     try {
       const updatedSettings = { ...settings, [key]: value };
       setSettings(updatedSettings);
