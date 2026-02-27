@@ -170,7 +170,6 @@ export default function MiniPlayer() {
 
   return (
     <>
-      {/* Mini Player Bar */}
       <TouchableOpacity
         style={styles.miniPlayerContainer}
         onPress={() => setShowFullPlayer(true)}
@@ -181,7 +180,7 @@ export default function MiniPlayer() {
             <Image source={{ uri: currentTrack.artwork }} style={styles.miniArtwork} />
           ) : (
             <View style={[styles.miniArtwork, styles.placeholderArtwork]}>
-              <Ionicons name="musical-note" size={20} color="#FFFFFF" />
+              <Ionicons name=\"musical-note\" size={20} color=\"#FFFFFF\" />
             </View>
           )}
 
@@ -198,12 +197,11 @@ export default function MiniPlayer() {
             <Ionicons
               name={isPlaying ? 'pause' : 'play'}
               size={28}
-              color="#FFFFFF"
+              color=\"#FFFFFF\"
             />
           </TouchableOpacity>
         </View>
 
-        {/* Progress Bar */}
         <View style={styles.miniProgressBar}>
           <View
             style={[
@@ -214,37 +212,33 @@ export default function MiniPlayer() {
         </View>
       </TouchableOpacity>
 
-      {/* Full Player Modal */}
       <Modal
         visible={showFullPlayer}
-        animationType="slide"
-        presentationStyle="fullScreen"
+        animationType=\"slide\"
+        presentationStyle=\"fullScreen\"
         onRequestClose={() => setShowFullPlayer(false)}
       >
         <View style={styles.fullPlayerContainer}>
-          {/* Header */}
           <View style={styles.fullPlayerHeader}>
             <TouchableOpacity onPress={() => setShowFullPlayer(false)}>
-              <Ionicons name="chevron-down" size={28} color="#FFFFFF" />
+              <Ionicons name=\"chevron-down\" size={28} color=\"#FFFFFF\" />
             </TouchableOpacity>
             <Text style={styles.fullPlayerHeaderTitle}>Now Playing</Text>
             <TouchableOpacity>
-              <Ionicons name="ellipsis-vertical" size={24} color="#FFFFFF" />
+              <Ionicons name=\"ellipsis-vertical\" size={24} color=\"#FFFFFF\" />
             </TouchableOpacity>
           </View>
 
-          {/* Album Artwork */}
           <View style={styles.artworkContainer}>
             {currentTrack.artwork ? (
               <Image source={{ uri: currentTrack.artwork }} style={styles.fullArtwork} />
             ) : (
               <View style={[styles.fullArtwork, styles.placeholderArtwork]}>
-                <Ionicons name="musical-note" size={120} color="#FFFFFF" />
+                <Ionicons name=\"musical-note\" size={120} color=\"#FFFFFF\" />
               </View>
             )}
           </View>
 
-          {/* Track Info */}
           <View style={styles.trackInfoContainer}>
             <Text style={styles.fullTrackTitle} numberOfLines={1}>
               {currentTrack.metadata.title}
@@ -254,7 +248,6 @@ export default function MiniPlayer() {
             </Text>
           </View>
 
-          {/* Progress Slider */}
           <View style={styles.progressContainer}>
             <Slider
               style={styles.progressSlider}
@@ -262,9 +255,9 @@ export default function MiniPlayer() {
               minimumValue={0}
               maximumValue={duration || 1}
               onSlidingComplete={handleSeek}
-              minimumTrackTintColor="#1DB954"
-              maximumTrackTintColor="#404040"
-              thumbTintColor="#FFFFFF"
+              minimumTrackTintColor=\"#1DB954\"
+              maximumTrackTintColor=\"#404040\"
+              thumbTintColor=\"#FFFFFF\"
             />
             <View style={styles.timeContainer}>
               <Text style={styles.timeText}>{formatDuration(position)}</Text>
@@ -272,30 +265,29 @@ export default function MiniPlayer() {
             </View>
           </View>
 
-          {/* Controls */}
           <View style={styles.controlsContainer}>
             <TouchableOpacity onPress={toggleShuffle} style={styles.controlButton}>
               <Ionicons
-                name="shuffle"
+                name=\"shuffle\"
                 size={24}
                 color={shuffleMode ? '#1DB954' : '#B3B3B3'}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handlePrevious} style={styles.controlButton}>
-              <Ionicons name="play-skip-back" size={36} color="#FFFFFF" />
+              <Ionicons name=\"play-skip-back\" size={36} color=\"#FFFFFF\" />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={togglePlayPause} style={styles.playPauseButton}>
               <Ionicons
                 name={isPlaying ? 'pause' : 'play'}
                 size={40}
-                color="#000000"
+                color=\"#000000\"
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleNext} style={styles.controlButton}>
-              <Ionicons name="play-skip-forward" size={36} color="#FFFFFF" />
+              <Ionicons name=\"play-skip-forward\" size={36} color=\"#FFFFFF\" />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleRepeat} style={styles.controlButton}>
@@ -307,16 +299,15 @@ export default function MiniPlayer() {
             </TouchableOpacity>
           </View>
 
-          {/* Additional Controls */}
           <View style={styles.additionalControls}>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="heart-outline" size={24} color="#FFFFFF" />
+              <Ionicons name=\"heart-outline\" size={24} color=\"#FFFFFF\" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="add-circle-outline" size={24} color="#FFFFFF" />
+              <Ionicons name=\"add-circle-outline\" size={24} color=\"#FFFFFF\" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="share-outline" size={24} color="#FFFFFF" />
+              <Ionicons name=\"share-outline\" size={24} color=\"#FFFFFF\" />
             </TouchableOpacity>
           </View>
         </View>
@@ -326,7 +317,6 @@ export default function MiniPlayer() {
 }
 
 const styles = StyleSheet.create({
-  // Mini Player Styles
   miniPlayerContainer: {
     position: 'absolute',
     bottom: 60,
@@ -376,8 +366,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#1DB954',
   },
-
-  // Full Player Styles
   fullPlayerContainer: {
     flex: 1,
     backgroundColor: '#000',
