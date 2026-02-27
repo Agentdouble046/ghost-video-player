@@ -1,74 +1,160 @@
 diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
-index 542b9ca..929ffd8 100644
+index 9de53f2..7f55faf 100644
 --- a/frontend/app/(tabs)/settings.tsx
 +++ b/frontend/app/(tabs)/settings.tsx
-@@ -27,7 +27,7 @@ export default function SettingsScreen() {
-     artistSeparators: [';', '/', ','],
-     genreSeparators: [';', '/', ','],
-     enableBackgroundPlay: true,
--    alwaysBackgroundPlay: false,
-+    alwaysBackgroundPlay: true,
-     enableVideoPlayback: true,
-     enableSubtitles: true,
-     defaultPlaybackSpeed: 1.0,
+@@ -46,14 +46,14 @@ export default function SettingsScreen() {
+ 
+   const loadSettings = async () => {
+     try {
+-      const data = await api.get('/settings') as AppSettings;
++      const data = await api.get('/settings');
+       setSettings(data);
+     } catch (error) {
+       console.error('Error loading settings:', error);
+     }
+   };
+ 
+-  const updateSetting = async (key: keyof AppSettings, value: any) => {
++  const updateSetting = async (key, value) => {
+     try {
+       const updatedSettings = { ...settings, [key]: value };
+       setSettings(updatedSettings);
+@@ -128,8 +128,40 @@ export default function SettingsScreen() {
+       </View>
+ 
+       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
++        {/* Media Scanner */}
++        <Text style={styles.sectionTitle}>Media Library</Text>
++        <View style={styles.section}>
++          <TouchableOpacity 
++            style={styles.settingItem}
++            onPress={() => setShowMediaScanner(true)}
++          >
++            <View style={styles.settingLeft}>
++              <Ionicons name='scan' size={24} color={themeColor} />
++              <View style={styles.settingText}>
++                <Text style={styles.settingTitle}>Scan Local Media</Text>
++                <Text style={styles.settingSubtitle}>Find audio & video files on device</Text>
++              </View>
++            </View>
++            <Ionicons name='chevron-forward' size={20} color='#666' />
++          </TouchableOpacity>
++        </View>
++
++        {/* Appearance */}
+         <Text style={styles.sectionTitle}>Appearance</Text>
+         <View style={styles.section}>
++          <TouchableOpacity 
++            style={styles.settingItem}
++            onPress={() => setShowThemeCustomizer(true)}
++          >
++            <View style={styles.settingLeft}>
++              <Ionicons name='color-palette' size={24} color={themeColor} />
++              <View style={styles.settingText}>
++                <Text style={styles.settingTitle}>Theme & Background</Text>
++                <Text style={styles.settingSubtitle}>Customize colors and backgrounds</Text>
++              </View>
++            </View>
++            <Ionicons name='chevron-forward' size={20} color='#666' />
++          </TouchableOpacity>
+           <SettingSwitch
+             icon="color-palette"
+             title="Dynamic Theming"
+@@ -275,6 +307,18 @@ export default function SettingsScreen() {
+           </TouchableOpacity>
+         </View>
+       </ScrollView>
++
++      {/* Theme Customizer Modal */}
++      <ThemeCustomizer
++        visible={showThemeCustomizer}
++        onClose={() => setShowThemeCustomizer(false)}
++      />
++
++      {/* Media Scanner Modal */}
++      <MediaScanner
++        visible={showMediaScanner}
++        onClose={() => setShowMediaScanner(false)}
++      />
+     </SafeAreaView>
+   );
+ }
 diff --git a/model.patch b/model.patch
-index 099a04d..e69de29 100644
+index 2bc5193..e69de29 100644
 --- a/model.patch
 +++ b/model.patch
-@@ -1,56 +0,0 @@
--diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
--index e1cc07e..daa61fa 100644
----- a/frontend/src/types/media.ts
--+++ b/frontend/src/types/media.ts
--@@ -98,7 +98,7 @@ export interface AppSettings {
--   artistSeparators: string[];
--   genreSeparators: string[];
--   enableBackgroundPlay: boolean;
---  alwaysBackgroundPlay?: boolean;
--+  alwaysBackgroundPlay: boolean;
--   enableVideoPlayback: boolean;
--   enableSubtitles: boolean;
--   defaultPlaybackSpeed: number;
+@@ -1,74 +0,0 @@
+-diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+-index 542b9ca..929ffd8 100644
+---- a/frontend/app/(tabs)/settings.tsx
+-+++ b/frontend/app/(tabs)/settings.tsx
+-@@ -27,7 +27,7 @@ export default function SettingsScreen() {
+-     artistSeparators: [';', '/', ','],
+-     genreSeparators: [';', '/', ','],
+-     enableBackgroundPlay: true,
+--    alwaysBackgroundPlay: false,
+-+    alwaysBackgroundPlay: true,
+-     enableVideoPlayback: true,
+-     enableSubtitles: true,
+-     defaultPlaybackSpeed: 1.0,
 -diff --git a/model.patch b/model.patch
--index 41e8122..e69de29 100644
+-index 099a04d..e69de29 100644
 ---- a/model.patch
 -+++ b/model.patch
--@@ -1,38 +0,0 @@
---diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
---index 4bac28f..542b9ca 100644
------ a/frontend/app/(tabs)/settings.tsx
---+++ b/frontend/app/(tabs)/settings.tsx
---@@ -27,6 +27,7 @@ export default function SettingsScreen() {
---     artistSeparators: [';', '/', ','],
---     genreSeparators: [';', '/', ','],
---     enableBackgroundPlay: true,
---+    alwaysBackgroundPlay: false,
---     enableVideoPlayback: true,
---     enableSubtitles: true,
---     defaultPlaybackSpeed: 1.0,
---@@ -173,6 +174,13 @@ export default function SettingsScreen() {
---             value={settings.enableBackgroundPlay}
---             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
---           />
---+          <SettingSwitch
---+            icon="infinite"
---+            title="Always Play in Background"
---+            subtitle="Never stop playback when minimizing app"
---+            value={settings.alwaysBackgroundPlay || false}
---+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
---+          />
---         </View>
--- 
---         <Text style={styles.sectionTitle}>Video</Text>
+-@@ -1,56 +0,0 @@
 --diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
---index 500f3bd..e1cc07e 100644
+--index e1cc07e..daa61fa 100644
 ----- a/frontend/src/types/media.ts
 --+++ b/frontend/src/types/media.ts
---@@ -98,6 +98,7 @@ export interface AppSettings {
+--@@ -98,7 +98,7 @@ export interface AppSettings {
 --   artistSeparators: string[];
 --   genreSeparators: string[];
 --   enableBackgroundPlay: boolean;
---+  alwaysBackgroundPlay?: boolean;
+---  alwaysBackgroundPlay?: boolean;
+--+  alwaysBackgroundPlay: boolean;
 --   enableVideoPlayback: boolean;
 --   enableSubtitles: boolean;
 --   defaultPlaybackSpeed: number;
+--diff --git a/model.patch b/model.patch
+--index 41e8122..e69de29 100644
+----- a/model.patch
+--+++ b/model.patch
+--@@ -1,38 +0,0 @@
+---diff --git a/frontend/app/(tabs)/settings.tsx b/frontend/app/(tabs)/settings.tsx
+---index 4bac28f..542b9ca 100644
+------ a/frontend/app/(tabs)/settings.tsx
+---+++ b/frontend/app/(tabs)/settings.tsx
+---@@ -27,6 +27,7 @@ export default function SettingsScreen() {
+---     artistSeparators: [';', '/', ','],
+---     genreSeparators: [';', '/', ','],
+---     enableBackgroundPlay: true,
+---+    alwaysBackgroundPlay: false,
+---     enableVideoPlayback: true,
+---     enableSubtitles: true,
+---     defaultPlaybackSpeed: 1.0,
+---@@ -173,6 +174,13 @@ export default function SettingsScreen() {
+---             value={settings.enableBackgroundPlay}
+---             onValueChange={(value) => updateSetting('enableBackgroundPlay', value)}
+---           />
+---+          <SettingSwitch
+---+            icon="infinite"
+---+            title="Always Play in Background"
+---+            subtitle="Never stop playback when minimizing app"
+---+            value={settings.alwaysBackgroundPlay || false}
+---+            onValueChange={(value) => updateSetting('alwaysBackgroundPlay', value)}
+---+          />
+---         </View>
+--- 
+---         <Text style={styles.sectionTitle}>Video</Text>
+---diff --git a/frontend/src/types/media.ts b/frontend/src/types/media.ts
+---index 500f3bd..e1cc07e 100644
+------ a/frontend/src/types/media.ts
+---+++ b/frontend/src/types/media.ts
+---@@ -98,6 +98,7 @@ export interface AppSettings {
+---   artistSeparators: string[];
+---   genreSeparators: string[];
+---   enableBackgroundPlay: boolean;
+---+  alwaysBackgroundPlay?: boolean;
+---   enableVideoPlayback: boolean;
+---   enableSubtitles: boolean;
+---   defaultPlaybackSpeed: number;
